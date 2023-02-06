@@ -1,29 +1,28 @@
 create table student (
-	rno int,
-    sname varchar(25),
-    dob date,
-    gender varchar(25),
-    class int,
-    college varchar(25),
-    city varchar(25),
-    marks int
+    rno int primary key, sname varchar(50),dob date, gender varchar(50), college varchar(50), city varchar(50), marks int 
 );
 
-SET SQL_SAFE_UPDATES = 0;
 
-insert into student values (1,"a","2003-01-01","male",9,"one","a",99),(2,"b","2003-02-02","female",10,"two","b",98),(3,"c","2003-03-03","male",11,"three","c",97),(4,"d","2003-04-04","male",12,"four","d",96);
+insert into student values ('1','a',to_date('2003-02-02','yyyy-mm-dd'),'male','tiet','delhi','100');
+insert into student values ('2','b',to_date('2003-03-03','yyyy-mm-dd'),'male','tiet','b','101');
+insert into student values ('3','c',to_date('2003-04-04','yyyy-mm-dd'),'female','tiet','c','102');
+insert into student values ('4','d',to_date('2003-05-05','yyyy-mm-dd'),'female','tiet','d','103');
+insert into student values ('5','e',to_date('2003-06-06','yyyy-mm-dd'),'male','tiet','e','104');
 
-select * from student;
+select * from student;  --3
 
-select sname as student_name from student where city="d";
+desc student ;  --4
 
-select * from student order by marks asc;
+select rno,sname from student where city='b' or city='d';   --5
 
-update student set marks=89 where rno=4;
+select * from student order by marks desc;  --6
 
-update student set sname="arth",city="delhi" where rno=9;
+update student  set rno='89' where rno='5'; --7
 
-delete  from student where city="b";
+update student set sname='swezal', city='patiala' where rno='2'     --8
 
-delete from student where marks<90;
-select * from student;
+delete from student where city='d'; --9
+
+delete from student where marks<102;    --10
+
+
