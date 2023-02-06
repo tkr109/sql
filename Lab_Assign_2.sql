@@ -1,39 +1,38 @@
-use mydb;
-create table workers(
-	empno int,
-    ename varchar(25),
-    job varchar(25),
+create table emp(
+   empno int,
+   ename varchar(50),
+   ejob varchar(50),
     sal int,
-    deptno int
+   deptno int
 );
 
-insert into workers values (1,"Aryan","clerk",1000,10),
-							(2,"pranav","salesperson",1001,11),
-							(3,"swezal","j1",1002,12),
-                            (4,"adi","j2",1003,13),
-							(5,"noob","j3",1004,14);
-select * from workers;
 
-select empno as employee_number , ename as employee_name from workers where deptno=10;
+insert into emp values (1, 'John', 'Manager', 5000, 10);
+insert into emp values (2, 'Jane', 'Clerk', 3000, 20);
+insert into emp values (3, 'Bob', 'Salesperson', 4000, 30);
 
-select ename,sal from workers where job="clerk" or job="salesperson";
+select empno,ename from emp where deptno=20;    --3
 
-select * from workers where sal>1001 and sal<1004;
+select * from emp where sal>2000;   --4
 
-select * from workers where sal between 1001 and 1004;
+select ename, sal as salary from emp where ejob='Clerk'; -- 5
 
-select * from workers where deptno=10 or deptno=12 or deptno=13;
+select * from emp where sal<3000 or sal>2000; --6 
 
-insert into workers value (6,"New","j6",1005,null);
+select * from emp where deptno='30' or deptno='20' or deptno='30'; --7
 
-select * from workers where deptno is null;
+select * from emp where deptno is null;
 
-select * from workers where ename like "p%";
+--9 ni hau
 
-select * from workers where ename like "%a%a%" or ename like "%A%A%";
-select * from workers where ename like "%i";
+select * from emp where ename like 'J%';    --10
 
-select * from workers where ename like "_r%" or ename like "_e%";
+select * from emp where ename like '%n';    --11
 
+select * from emp where ename like '%a%a%';     --12
 
-select * from workers where ename like "_r%a_" ;
+select * from emp where ename like '_o%';     --13
+
+select * from emp where ename like 'B%b';       --14
+
+select * from emp;
