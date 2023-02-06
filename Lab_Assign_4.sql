@@ -78,5 +78,40 @@ insert into p values (2,'a','b');
 select * from p;
 
 --6
+create table sp (
+    sno int , 
+    pno int,
+    qty int ,
+    constraint pk primary key (sno,pno),
+    constraint s_fk foreign key (sno) references s(sno),
+    constraint p_fk foreign key (pno) references p(pno)
+);
+
+
+select * from sp ;
+
+insert into sp values ('1','2','3');
+
 --7
+
+create table dept (
+    deptno int primary key , 
+    dname varchar(50),
+    constraint dept_ck check (dname in ('acc','comp','elect'))
+);
+
+insert into dept values (1,'acc');
+insert into dept values (2,'comp');
+select * from dept;
+
 --8
+
+create table empl (
+    empno int primary key, 
+    ename varchar(50) unique,
+    ejob varchar(50) not null,
+    sal int not null,
+    deptno int,
+    constraint emp_cke check(ejob in ('prof','ap','lect')),
+    constraint emp_fke foreign key (deptno) references dept(deptno)
+);
