@@ -1,0 +1,147 @@
+-- 1
+
+declare
+	num1 number:= 1;
+	num2 number:= 5;
+	num3 number:= 9;
+	maxnum number;
+begin
+
+	if num1 >= num2 and num1 >=num3 then
+    	maxnum := num1;
+	elsif num2 >= num1 and num2 >=num3 then
+    	maxnum := num2;
+	else 
+        maxnum := num3;
+	end if;
+    
+	dbms_output.put_line(maxnum);
+
+end;
+
+
+-- 2
+
+declare 
+	num1 number := 3;
+
+begin 
+	if mod(num1,2)=0 then
+		dbms_output.put_line('even');
+	else 
+		dbms_output.put_line('odd');
+	end if ;
+end;
+
+
+--3
+
+declare 
+	num1 number := 20;
+	grade varchar(50);
+begin 
+
+	if num1>80 then
+		grade:='A';
+	elsif num1>70 and num1<=80 then
+		grade:='B';
+	elsif num1>50 and num1<=70 then
+		grade:='C';
+	elsif num1>40 and num1<50 then
+		grade:='D';
+	else 
+		grade:='E';
+	end if;
+
+	dbms_output.put_line(grade);
+
+
+end;
+
+
+--4 
+
+declare 
+	num1 number := 5;
+begin 
+	for i in 1..10 loop 
+		dbms_output.put_line(num1*i);
+	end loop;
+end;
+
+--5 
+
+declare 
+	num1 number :=5;
+	ans number := 1;
+begin 
+	while num1>=1 loop
+		ans:=ans*num1;
+		num1:=num1-1;
+    end loop;
+
+	dbms_output.put_line(ans);
+end;
+
+-- 6 
+
+declare 
+    total number :=10;
+	num1 number := 0;
+	num2 number :=1;
+	nextn number ;
+begin 
+	for i in 1..total loop
+    	nextn := num1+num2;
+		dbms_output.put_line(nextn);
+		num1:=num2;
+		num2:=nextn;
+	end loop;
+end;
+
+-- 7 
+
+-- 8
+
+declare 
+	num1 number;
+	num2 number;
+	choice number;
+	ans number;
+begin
+	dbms_output.put_line('Enter the number 1');
+	num1:=&num1;
+
+	dbms_output.put_line('Enter the number 2');
+	num2:=&num2;
+
+	dbms_output.put_line('1 add, 2 sub, 3 multi, 4 div');
+	choice:=&choice;
+
+	if choice=1 then
+		ans=num1+num2;
+	elsif choice=2 then
+		ans=num1-num2;
+	elsif choice=3 then
+		ans=num1*num2;
+	elsif choice=4 then
+		ans=num1/num2;
+	end if;
+
+dbms_output.put_line(ans);
+
+end;
+
+-- 9 
+
+begin 
+	for i in 1..20 loop
+		if mod (i,5)=0 then 
+			dbms_output.put_line(i);
+		end if;
+	end loop;
+end;
+
+-- 10
+
+    
