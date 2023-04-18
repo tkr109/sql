@@ -3,8 +3,7 @@
 descirbe empl;
 
 --2
-
-select constraint_name,constraint_type from information_schema.table_constraints where table_name='empl';
+select constraint_name, constraint_type from user_constraints where table_name='EMPL';
 
 --3 
 
