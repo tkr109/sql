@@ -101,6 +101,19 @@ end;
 
 -- 7 
 
+declare 
+	num1 number :=12345;
+	ans number:=0;
+    a number:=0;
+begin 
+	while num1>0 loop
+		a:=mod(num1,10);
+		ans:=ans*10+a;
+		num1:=floor(num1/10);
+    end loop;
+dbms_output.put_line(ans);
+end;
+
 -- 8
 
 declare 
