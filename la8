@@ -1,0 +1,120 @@
+CREATE TABLE Author(ID INT PRIMARY KEY,Name VARCHAR(50) NOT NULL,Birth_Year INT NOT NULL,Death_Year INT);
+CREATE TABLE Book(ID INT PRIMARY KEY,Author_ID INT NOT NULL,Title VARCHAR(100) NOT NULL,Publish_Year INT NOT NULL,Publishing_House VARCHAR(100) NOT NULL,Rating DECIMAL(3,1) NOT NULL,FOREIGN KEY (Author_ID) REFERENCES Author(ID));
+CREATE TABLE Adaptation(Book_ID INT NOT NULL,Type VARCHAR(50) NOT NULL,Title VARCHAR(100) NOT NULL,Release_Year INT NOT NULL,Rating DECIMAL(3,1) NOT NULL,FOREIGN KEY (Book_ID) REFERENCES Book(ID));
+
+-- Author table
+INSERT INTO Author (ID, Name, Birth_Year, Death_Year) VALUES (1, 'J.K. Rowling', 1965, NULL);
+INSERT INTO Author (ID, Name, Birth_Year, Death_Year) VALUES (2, 'Harper Lee', 1926, 2016);
+INSERT INTO Author (ID, Name, Birth_Year, Death_Year) VALUES (3, 'George R.R. Martin', 1948, NULL);
+INSERT INTO Author (ID, Name, Birth_Year, Death_Year) VALUES (4, 'J.R.R. Tolkien', 1892, 1973);
+INSERT INTO Author (ID, Name, Birth_Year, Death_Year) VALUES (5, 'Stephen King', 1947, NULL);
+
+-- Book table
+INSERT INTO Book (ID, Author_ID, Title, Publish_Year, Publishing_House, Rating) VALUES (1, 1, 'Harry Potter and the Philosopher''s Stone', 1997, 'Bloomsbury', 4.5);
+INSERT INTO Book (ID, Author_ID, Title, Publish_Year, Publishing_House, Rating) VALUES (2, 1, 'Harry Potter and the Chamber of Secrets', 1998, 'Bloomsbury', 4.3);
+INSERT INTO Book (ID, Author_ID, Title, Publish_Year, Publishing_House, Rating) VALUES (3, 2, 'To Kill a Mockingbird', 1960, 'J.B. Lippincott & Co.', 4.8);
+INSERT INTO Book (ID, Author_ID, Title, Publish_Year, Publishing_House, Rating) VALUES (4, 3, 'A Game of Thrones', 1996, 'Bantam Spectra', 4.6);
+INSERT INTO Book (ID, Author_ID, Title, Publish_Year, Publishing_House, Rating) VALUES (5, 4, 'The Lord of the Rings', 1954, 'George Allen & Unwin', 4.7);
+INSERT INTO Book (ID, Author_ID, Title, Publish_Year, Publishing_House, Rating) VALUES (6, 5, 'The Shining', 1977, 'Doubleday', 4.4);
+
+-- Adaptation table
+INSERT INTO Adaptation (Book_ID, Type, Title, Release_Year, Rating) VALUES (1, 'Movie', 'Harry Potter and the Philosopher''s Stone', 2001, 4.2);
+INSERT INTO Adaptation (Book_ID, Type, Title, Release_Year, Rating) VALUES (1, 'Movie', 'Harry Potter and the Philosopher''s Stone', 2021, 4.8);
+INSERT INTO Adaptation (Book_ID, Type, Title, Release_Year, Rating) VALUES (2, 'Movie', 'Harry Potter and the Chamber of Secrets', 2002, 4.0);
+INSERT INTO Adaptation (Book_ID, Type, Title, Release_Year, Rating) VALUES (3, 'Movie', 'To Kill a Mockingbird', 1962, 4.9);
+INSERT INTO Adaptation (Book_ID, Type, Title, Release_Year, Rating) VALUES (5, 'Movie', 'The Lord of the Rings: The Fellowship of the Ring', 2001, 4.7);
+INSERT INTO Adaptation (Book_ID, Type, Title, Release_Year, Rating) VALUES (5, 'Movie', 'The Lord of the Rings: The Two Towers', 2002, 4.6);
+
+--Q1
+select b1.title ,a1.name from book b1 join author a1 on b1.author_id = a1.id;
+
+--Q2
+select b1.title, a1.name, b1.publish_year from book b1 join author a1 on b1.author_id=a1.id where(b1.publish_year > 1960);
+
+--Q3
+select b1.title, a1.title, a1.release_year, b1.publish_year from book b1 join adaptation a1 on b1.id=a1.book_id where( b1.rating<a1.rating);
+
+--Q4
+select b1.title, b1.rating from book b1 join author a1 on b1.author_id=a1.id where (a1.death_year is null);
+
+--Q5
+select b1.title, a1.name from book b1 full outer join author a1 on b1.author_id= a1.id;
+
+--Q6
+select b1.title, a1.name from book b1 cross join author a1 where(a1.name ='Harper Lee');
+
+--Q7
+select b1.title, b1.publishing_house from book b1 right join adaptation a1 on a1.book_id = b1.id where(a1.type ='Movie');
+
+--Q8
+select b1.title, 
+    case
+    	when a1.birth_year between 1900 and 2000
+    	then a1.name
+    else 
+    	null
+    end as Author_name
+from book b1
+left join author
+ a1
+on a1.id=b1.author_id
+
+
+
+
+Ass
+ignment 8 part 2--
+
+CREATE TABLE tableName 
+(
+    Year	INT,
+    Subject	VARCHAR(512),
+    Winner	VARCHAR(512),
+    COUNTRY	VARCHAR(512),
+    CATEGORY	VARCHAR(512)
+);
+
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1970', 'Physics', 'Hannes  A.lfven', 'Sweden', 'Scientist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1970', 'Physics', 'Louis Neel', 'France', 'Scientist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1970 ', 'Chemistry', 'Luis Federico Leloir', 'France', 'Scientist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1970', 'Physiology', 'Ulf von Euler', 'Sweden ', 'Scientist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1970', 'Physiology', 'Bernard Katz', 'Germany', 'Scientist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1970', 'Literature', 'Aleksandr Solzhenitsyn', 'Russia', 'Linguist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1970', 'Economics', 'Paul Samuelson', 'USA', 'Economist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1970', 'Physiology', 'Julius Axelrod', 'USA', 'Scientist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1971', 'Physics', 'Dennis Gabor', 'Hungary', 'Scientist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1971', 'Chemistry', 'Gerhard Herzberg', 'Germany', 'Scientist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1971', 'Peace', 'Willy  Brandtz', 'Germany', 'Chancellor');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1971', 'Literature', 'Pablo Neruda', 'Chile', 'Linguist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1971', 'Economics', 'Simon Kuznets', 'Russia', 'Economist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1978', 'Peace', 'Anwar  al-Sadat', 'Egypt', 'President');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1978', 'Peace', 'Henachem Begin', 'Israel', 'Prime Minister');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1987', 'Chemistry', 'Donald J.Cram', 'USA', 'Scientist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1987', 'Chemistry', 'Jean-Marie Lehn', 'France', 'Scientist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1987', 'Physiology', 'Susumu Tonegawa', 'Japan', 'Scientist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1994', 'Economics', 'Reinhard Selten', 'Germany', 'Economist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1994', 'Peace', 'Yitzhak  Rabin', 'Israel', 'Prime Minister');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1987', 'Physics', 'Johannes Georg Bednorz', 'Germany', 'Scientist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1987', 'Literature', 'Joseph Brodsky', 'Russia', 'Linguist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1987', 'Economics', 'Robert  Solow', 'USA', 'Economist');
+INSERT INTO tableName (Year, Subject, Winner, COUNTRY, CATEGORY) VALUES ('1994', 'Literature', 'Kenzaburo  Oe', 'Japan', 'Linguist');
+
+
+
+Queries:
+
+select count(*) from tablename;
+select subject from tablename group by subject;
+select count(*) from tablename group by subject having subject='Physics'; 
+select count(*),subject from tablename group by subject; 
+select Subject, MIN(Year) AS FirstYear FROM tableName GROUP BY Subject; 
+select count(*),subject from tablename group by subject,year having year=1970;
+select subject,count(*) from tablename group by subject;
+select count(*),subject,year from tablename group by subject,year;
+select year from tablename group by year,subject having subject = 'Physics' and count(*)>=2;
+select winner from tablename group by winner having count(*)>=1;
+select winner from tablename group by winner,subject having count(*)>=1;
+select year,su
+bject from tablename group by year,subject having year>1970 and count(*)>=2;
+
+
