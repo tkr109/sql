@@ -1,0 +1,31 @@
+create table dept(
+    dno int primary key,
+    dname varchar(50)
+);
+
+create table emp(
+    eno int primary key ,
+    ename varchar(50),
+    job varchar(50),
+    sal int, 
+    doj date, 
+    mgrno int, 
+    deptno int, foreign key (deptno) references dept(dno)
+);
+
+insert into dept values (1,'a');
+insert into dept values (2,'b');
+insert into dept values (3,'c');
+insert into dept values (4,'d');
+
+insert into emp values (1,'aa','j1',10,TO_DATE('2022-04-01', 'YYYY-MM-DD'),1,1);
+insert into emp values (2,'bb','j2',10,TO_DATE('2022-02-01', 'YYYY-MM-DD'),1,1);
+
+select e.ename , m.ename from emp e join emp m on e.eno=m.eno ;
+
+
+select e.ename from emp e join emp m on e.doj<m.doj;
+
+select emp.ename,dept.dname from emp join dept on emp.deptno=dept.dno; 
+
+select ename , dname from emp right join dept on emp.deptno=dept.dno;
